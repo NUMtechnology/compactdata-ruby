@@ -93,55 +93,55 @@ RSpec.describe CompactData do
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_generate_compactdata_from_json_with_unicode_1' do
+  it 'can generate compactdata from json with unicode 1' do
     compactdata = 'key=Valu®¥π∏'
     json = "{\n  \"key\":\"Valu®¥π∏\"\n}"
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_generate_compactdata_from_json_with_unicode_2' do
+  it 'can generate compactdata from json with unicode 2' do
     compactdata = 'key®¥π∏=Valu®¥π∏'
     json = "{\n  \"key®¥π∏\":\"Valu®¥π∏\"\n}"
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_generate_compactdata_from_json_with_nulls_1' do
+  it 'can generate compactdata from json with nulls 1' do
     compactdata = 'key=null'
     json = "{\n  \"key\":null\n}"
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_generate_compactdata_from_json_with_nulls_2' do
+  it 'can generate compactdata from json with nulls 2' do
     compactdata = 'key=`null`'
     json = '{"key":"null"}'
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_generate_compactdata_from_json_with_empty_string' do
+  it 'can generate compactdata from json with empty string' do
     compactdata = 'key=``'
     json = '{"key":""}'
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_generate_compactdata_for_DNS_with_embedded_double_quotes' do
+  it 'can generate compactdata for DNS with embedded double quotes' do
     compactdata = 'key=Something ~u0022quoted~u0022 in the middle'
     json = '{"key":"Something \"quoted\" in the middle"}'
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_generate_compactdata_from_json_with_unicode_3' do
+  it 'can generate compactdata from json with unicode 3' do
     compactdata = 'key🦄=Value🦄'
     json = '{"key🦄":"Value🦄"}'
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_convert_opening_times_to_compactdata' do
+  it 'can convert opening times to compactdata' do
     json = "{\n          \"hours\": {\n            \"original\": [\n              \"d@8-20@LON\",\n              \"7@9-18\"\n            ],\n            \"days\": [\n              {\n                \"date\": \"2019-12-13\",\n                \"available\": [\n                  \"08:00:00-20:00:00\"\n                ]\n              },\n              {\n                \"date\": \"2019-12-14\",\n                \"available\": [\n                  \"08:00:00-20:00:00\"\n                ]\n              },\n              {\n                \"date\": \"2019-12-15\",\n                \"available\": [\n                  \"09:00:00-18:00:00\"\n                ]\n              }\n           ]\n        }\n}"
     compactdata = 'hours(original[d@8-20@LON;7@9-18];days[(date=2019-12-13;available[08:00:00-20:00:00]);(date=2019-12-14;available[08:00:00-20:00:00]);(date=2019-12-15;available[09:00:00-18:00:00])])'
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata
   end
 
-  it 'can_convert_PRM_JSON_to_compactdata' do
+  it 'can convert PRM JSON to compactdata' do
     json = '{"@n":1,"@p":1,"o":{"n":"company name","c":[{"t":{"v":"+447412345678"}},{"u":"example.com"}]}}'
     compactdata = '@n=1;@p=1;o(n=company name;c[t(v=+447412345678);u=example.com])'
     expect(CompactData.generate(JSON.parse(json))).to eq compactdata

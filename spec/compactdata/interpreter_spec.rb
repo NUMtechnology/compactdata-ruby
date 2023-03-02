@@ -62,4 +62,24 @@ RSpec.describe CompactData do
     result = JSON.generate(CompactData.parse('a=1;b=2'))
     expect(result).to eq '{"a":1,"b":2}'
   end
+
+  it 'can deal with braced strings 1' do
+    result = JSON.generate(CompactData.parse('a={1};b={[]}'))
+    expect(result).to eq '{"a":"{1}","b":"{[]}"}'
+  end
+
+  it 'can deal with braced strings 2' do
+    result = JSON.generate(CompactData.parse('a={};b={[()}'))
+    expect(result).to eq '{"a":"{}","b":"{[()}"}'
+  end
+
+  it 'can deal with braced strings with an escaped brace' do
+    result = JSON.generate(CompactData.parse('a={this is a test { test 1 \} }'))
+    expect(result).to eq '{"a":"{this is a test { test 1 } }"}'
+  end
+
+  it 'can deal with quoted braced strings as normal quoted strings' do
+    result = JSON.generate(CompactData.parse('a="{this is a test { test 1 } }"'))
+    expect(result).to eq '{"a":"{this is a test { test 1 } }"}'
+  end
 end
