@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'pry'
-
 module CompactData
   # A Parser module
   module Parser
@@ -23,6 +21,8 @@ module CompactData
       '\(' => '(',
       '~)' => ')',
       '\)' => ')',
+      '~}' => '}',
+      '\}' => '}',
       '~[' => '[',
       '\[' => '[',
       '~]' => ']',

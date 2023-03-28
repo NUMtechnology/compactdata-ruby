@@ -55,6 +55,10 @@ module CompactData
         when '`'
           tok_type = :quoted
           tok_end = scan_to_end_of_quoted(@str, @tok_start, '`')
+        when '{'
+          ## Braced strings must include the braces in the string
+          tok_type = :quoted
+          tok_end = scan_to_end_of_quoted(@str, @tok_start, '}')
         else
           tok_type = :string
           tok_end = scan_to_end_of_string(@str, @tok_start)

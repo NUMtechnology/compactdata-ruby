@@ -5,11 +5,11 @@ require 'COMPACTDATA/VERSION'
 Gem::Specification.new do |spec|
   spec.name          = 'compactdata'
   spec.version       = COMPACTDATA::VERSION
-  spec.authors       = ['Elliott Brown']
-  spec.email         = ['mail@elliottinvent.com']
+  spec.authors       = ['NUM Technology Ltd']
+  spec.email         = ['developer@num.uk']
 
   spec.summary       = 'A Ruby parser for the CompactData serialisation format.'
-  spec.homepage      = 'https://gitlab.com/NUMTechnology/CompactData/Libraries/compactdata-ruby'
+  spec.homepage      = 'https://github.com/NUMTechnology/compactdata-ruby'
   spec.license       = 'MIT'
 
   # Specify which files should be added to the gem when it is released.
@@ -21,6 +21,6 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'rake', '>= 12.3.3'
+  spec.add_development_dependency 'rake', '~> 12.3'
   spec.add_development_dependency 'rspec', '~> 3.0'
 end
